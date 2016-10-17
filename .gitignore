@@ -5,3 +5,5 @@ custom.el
 auto-save-list
 elpa
 tmp
+projectile-bookmarks.eld
+projectile.cache

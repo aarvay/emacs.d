@@ -147,4 +147,11 @@
   (add-hook 'web-mode-hook 'emmet-mode)
   (setq emmet-preview-default nil))
 
-;;; Init.el ends here
+(use-package projectile
+  :ensure t
+  :config
+  (projectile-global-mode)
+  (setq projectile-enable-caching t)
+  :diminish (projectile-mode))
+
+;;; init.el ends here
