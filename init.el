@@ -68,11 +68,14 @@
 
 (server-start) ;; Allow this Emacs process to be a server for client processes.
 
-(use-package ido
+(use-package flx-ido
+  :ensure t
   :config
+  (ido-mode 1)
+  (ido-everywhere 1)
+  (flx-ido-mode 1)
   (setq ido-enable-flex-matching t)
-  (ido-everywhere t)
-  (ido-mode 1))
+  (setq ido-use-faces nil))
 
 (use-package hl-line
   :init (global-hl-line-mode 1)
@@ -83,6 +86,15 @@
   :ensure t
   :defer t
   :init (add-hook 'prog-mode-hook 'highlight-numbers-mode))
+
+(use-package drag-stuff
+  :ensure t
+  :bind (("ESC <up>" . drag-stuff-up)
+	 ("ESC <down>" . drag-stuff-down)))
+
+(use-package powerline
+  :ensure t
+  :init (powerline-default-theme))
 
 (use-package company
   :ensure t
@@ -98,8 +110,42 @@
 	  company-tooltip-flip-when-above t))
   :diminish company-mode)
 
-(use-package powerline
+(use-package smartparens
   :ensure t
-  :init (powerline-default-theme))
+  :init
+  (smartparens-global-mode)
+  (show-smartparens-global-mode)
+  :config
+  (require 'smartparens-config)
+  :diminish (smartparens-mode))
 
-;;; init.el ends here
+(use-package elixir-mode
+  :ensure t
+  :pin melpa)
+
+(use-package alchemist
+  :ensure t
+  :pin melpa
+  :config
+  (progn
+    (setq alchemist-goto-elixir-source-dir "~/.asdf/installs/elixir/1.3.4/")
+    (setq alchemist-goto-erlang-source-dir "~/.asdf/installs/erlang/ref-OTP-19.1.2/")))
+
+(use-package web-mode
+  :ensure t
+  :mode (("\\.html?\\'" . web-mode)
+	 ("\\.eex\\'" . web-mode))
+  :config
+  (progn
+    (setq web-mode-markup-indent-offset 2
+	  web-mode-css-indent-offset 2
+	  web-mode-code-indent-offset 2)))
+
+(use-package emmet-mode
+  :ensure t
+  :defer t
+  :config
+  (add-hook 'web-mode-hook 'emmet-mode)
+  (setq emmet-preview-default nil))
+
+;;; Init.el ends here
