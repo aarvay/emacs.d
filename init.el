@@ -143,7 +143,6 @@
 
 (use-package emmet-mode
   :ensure t
-  :defer t
   :config
   (add-hook 'web-mode-hook 'emmet-mode)
   (setq emmet-preview-default nil))
