@@ -166,4 +166,8 @@
   :ensure t
   :mode (("\\.rs\\'" . rust-mode)))
 
+(use-package toml-mode
+  :ensure t
+  :mode (("\\.toml\\'" . toml-mode)))
+
 ;;; init.el ends here
