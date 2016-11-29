@@ -66,8 +66,6 @@
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 
-(server-start) ;; Allow this Emacs process to be a server for client processes.
-
 (use-package flx-ido
   :ensure t
   :config
