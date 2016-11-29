@@ -163,7 +163,9 @@
 
 (use-package rust-mode
   :ensure t
-  :mode (("\\.rs\\'" . rust-mode)))
+  :mode (("\\.rs\\'" . rust-mode))
+  :config
+  (setq rust-format-on-save t))
 
 (use-package toml-mode
   :ensure t
