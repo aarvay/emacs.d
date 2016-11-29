@@ -113,6 +113,7 @@
   :init
   (smartparens-global-mode)
   (show-smartparens-global-mode)
+  :bind ("C-c f" . sp-up-sexp)
   :config
   (require 'smartparens-config)
   :diminish (smartparens-mode))
