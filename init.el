@@ -171,4 +171,13 @@
   :ensure t
   :mode (("\\.toml\\'" . toml-mode)))
 
+(use-package expand-region
+  :ensure t
+  :bind ("C-c w" . er/expand-region))
+
+(use-package multiple-cursors
+  :ensure t
+  :bind (("C-c e" . mc/edit-lines)
+	 ("C-c m" . mc/mark-next-like-this)))
+
 ;;; init.el ends here
