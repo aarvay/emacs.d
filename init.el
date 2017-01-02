@@ -178,6 +178,7 @@
 (use-package multiple-cursors
   :ensure t
   :bind (("C-c e" . mc/edit-lines)
-	 ("C-c m" . mc/mark-next-like-this)))
+	 ("C-c m" . mc/mark-next-like-this)
+	 ("C-c C-m" . mc/mark-all-like-this)))
 
 ;;; init.el ends here
