@@ -135,8 +135,8 @@
   :pin melpa
   :config
   (progn
-    (setq alchemist-goto-elixir-source-dir "~/.asdf/installs/elixir/1.3.4/")
-    (setq alchemist-goto-erlang-source-dir "~/.asdf/installs/erlang/ref-OTP-19.1.2/")))
+    (setq alchemist-goto-elixir-source-dir "~/.asdf/installs/elixir/1.4.2")
+    (setq alchemist-goto-erlang-source-dir "~/.asdf/installs/erlang/19.2")))
 
 (use-package web-mode
   :ensure t
