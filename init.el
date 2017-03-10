@@ -59,12 +59,17 @@
 (set-default 'truncate-lines t)
 (delete-selection-mode 1)
 (transient-mark-mode 1)
+(setq-default indent-tabs-mode nil)
 
 ;; utf-8 all the things
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
+
+(use-package js
+  :init
+  (setq js-indent-level 2 ))
 
 (use-package flx-ido
   :ensure t
@@ -152,6 +157,7 @@
   :ensure t
   :config
   (add-hook 'web-mode-hook 'emmet-mode)
+  (add-hook 'emmet-mode-hook (lambda () (setq emmet-indentation 2)))
   (setq emmet-preview-default nil))
 
 (use-package projectile
