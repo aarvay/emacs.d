@@ -26,7 +26,17 @@
 (require 'diminish)
 (require 'bind-key)
 
+;; Keep emacs Custom-settings in separate file
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(load custom-file)
+
+;; Auto refresh buffers
+(global-auto-revert-mode 1)
+
+;; Also auto refresh dired, but be quiet about it
+(setq global-auto-revert-non-file-buffers t)
+(setq auto-revert-verbose nil)
+
 
 ;; Place all auto-saves and backups in tmp
 (setq temporary-file-directory (expand-file-name "~/.emacs.d/tmp"))
@@ -41,11 +51,13 @@
 (menu-bar-mode -1)
 
 ;; Startup stuff
+(setq inhibit-startup-message t)
+
 (setq ring-bell-function #'ignore
       initial-scratch-message nil
       initial-major-mode 'org-mode
       column-number-mode t
-      linum-format " %d ")
+      linum-format "%d ")
 (global-linum-mode)
 
 (fset 'display-startup-echo-area-message 'ignore)
