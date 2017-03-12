@@ -62,9 +62,6 @@
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-(load-theme 'zenburn t)
-
 ;; Editor behaviour stuff
 (set-default 'truncate-lines t)
 (delete-selection-mode 1)
@@ -76,6 +73,10 @@
 (set-keyboard-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
+
+(use-package zenburn-theme
+  :ensure t
+  :config (load-theme 'zenburn t))
 
 (use-package ido
   :config
