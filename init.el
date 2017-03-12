@@ -37,7 +37,6 @@
 (setq global-auto-revert-non-file-buffers t)
 (setq auto-revert-verbose nil)
 
-
 ;; Place all auto-saves and backups in tmp
 (setq temporary-file-directory (expand-file-name "~/.emacs.d/tmp"))
 (setq backup-directory-alist
@@ -51,9 +50,8 @@
 (menu-bar-mode -1)
 
 ;; Startup stuff
-(setq inhibit-startup-message t)
-
-(setq ring-bell-function #'ignore
+(setq inhibit-startup-message t
+      ring-bell-function #'ignore
       initial-scratch-message nil
       initial-major-mode 'org-mode
       column-number-mode t
@@ -79,18 +77,43 @@
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 
-(use-package js
-  :init
-  (setq js-indent-level 2 ))
+(use-package ido
+  :config
+  (ido-mode 1)
+  (ido-everywhere 1))
+
+(use-package ido-ubiquitous
+  :ensure t
+  :pin melpa
+  :config
+  (ido-ubiquitous-mode 1))
 
 (use-package flx-ido
   :ensure t
   :config
-  (ido-mode 1)
-  (ido-everywhere 1)
   (flx-ido-mode 1)
   (setq ido-enable-flex-matching t)
   (setq ido-use-faces nil))
+
+(use-package ido-vertical-mode
+  :ensure t
+  :config
+  (ido-vertical-mode 1)
+  (setq ido-vertical-define-keys 'C-n-C-p-up-and-down)
+  (setq ido-use-faces t)
+  (set-face-attribute 'ido-vertical-first-match-face nil
+                      :background nil
+                      :foreground "orange")
+  (set-face-attribute 'ido-vertical-only-match-face nil
+                      :background nil
+                      :foreground nil)
+  (set-face-attribute 'ido-vertical-match-face nil
+                      :foreground nil)
+  (ido-vertical-mode 1))
+
+(use-package smex
+  :ensure t
+  :bind ("M-x" . smex))
 
 (use-package hl-line
   :init (global-hl-line-mode 1)
@@ -171,6 +194,10 @@
   (add-hook 'web-mode-hook 'emmet-mode)
   (add-hook 'emmet-mode-hook (lambda () (setq emmet-indentation 2)))
   (setq emmet-preview-default nil))
+
+(use-package js
+  :init
+  (setq js-indent-level 2 ))
 
 (use-package projectile
   :ensure t
