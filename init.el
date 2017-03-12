@@ -125,6 +125,10 @@
   :defer t
   :init (add-hook 'prog-mode-hook 'highlight-numbers-mode))
 
+(use-package whitespace-cleanup-mode
+  :ensure t
+  :init (global-whitespace-cleanup-mode))
+
 (use-package drag-stuff
   :ensure t
   :bind (("ESC <up>" . drag-stuff-up)
