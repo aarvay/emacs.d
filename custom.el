@@ -5,7 +5,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (whitespace-cleanup-mode smex ido-ubiquitous ido-vertical-mode flycheck multiple-cursors web-mode use-package toml-mode smartparens rust-mode projectile powerline markdown-mode magit-popup highlight-numbers flx-ido expand-region emmet-mode drag-stuff alchemist ag))))
+    (multiple-cursors expand-region toml-mode rust-mode projectile emmet-mode web-mode alchemist elixir-mode markdown-mode smartparens company drag-stuff highlight-numbers smex ido-vertical-mode flx-ido ido-ubiquitous use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
