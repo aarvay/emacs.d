@@ -3,12 +3,11 @@
 ;; Don't load outdated byte code
 (setq load-prefer-newer t)
 
-;; Increase GC threshold. I'm on a modern machine :)
+;; Increase GC threshold.
 (setq gc-cons-threshold 20000000)
 
 ;; Setup package.el with use-package
 (require 'package)
-(setq package-enable-at-startup nil)
 (setq package-archives
       '(("melpa-stable" . "https://stable.melpa.org/packages/")
         ("elpa" . "http://elpa.gnu.org/packages/")
@@ -17,25 +16,16 @@
       '(("melpa-stable" . 10)
         ("elpa" . 5)
         ("melpa" . 0)))
+(setq package-enable-at-startup nil)
 (package-initialize)
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
 
-(require 'diminish)
-(require 'bind-key)
-
-;; Keep emacs Custom-settings in separate file
+;; Keep emacs custom settings in separate file
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
-
-;; Auto refresh buffers
-(global-auto-revert-mode 1)
-
-;; Also auto refresh dired, but be quiet about it
-(setq global-auto-revert-non-file-buffers t)
-(setq auto-revert-verbose nil)
 
 ;; Place all auto-saves and backups in tmp
 (setq temporary-file-directory (expand-file-name "~/.emacs.d/tmp"))
@@ -44,29 +34,34 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
+;; Allow being lazy when replying yes or now
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+;; Auto refresh buffers, dired, and be quiet about it
+(global-auto-revert-mode 1)
+(setq global-auto-revert-non-file-buffers t
+      auto-revert-verbose nil)
+
+;; Startup stuff
+(setq inhibit-startup-message t
+      initial-scratch-message nil
+      initial-major-mode 'org-mode)
+(fset 'display-startup-echo-area-message 'ignore)
+
 ;; Get rid of the scroll bar, tool bar, and menu bar.
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 
-;; Startup stuff
-(setq inhibit-startup-message t
-      ring-bell-function #'ignore
-      initial-scratch-message nil
-      initial-major-mode 'org-mode
-      column-number-mode t
-      linum-format "%d ")
-(global-linum-mode)
-
-(fset 'display-startup-echo-area-message 'ignore)
-
-(defalias 'yes-or-no-p 'y-or-n-p)
-
 ;; Editor behaviour stuff
 (set-default 'truncate-lines t)
 (delete-selection-mode 1)
 (transient-mark-mode 1)
-(setq-default indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil
+              tab-width 2
+              column-number-mode t
+              ring-bell-function #'ignore
+              cursor-type 'bar)
 
 ;; utf-8 all the things
 (set-terminal-coding-system 'utf-8)
@@ -74,9 +69,13 @@
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 
-(use-package zenburn-theme
-  :ensure t
-  :config (load-theme 'zenburn t))
+;; Bind meta to cmd
+(when (eq system-type 'darwin)
+  (setq mac-command-modifier 'meta)
+  (setq mac-option-modifier nil))
+
+(require 'diminish)
+(require 'bind-key)
 
 (use-package ido
   :config
@@ -100,44 +99,24 @@
   :ensure t
   :config
   (ido-vertical-mode 1)
-  (setq ido-vertical-define-keys 'C-n-C-p-up-and-down)
-  (setq ido-use-faces t)
-  (set-face-attribute 'ido-vertical-first-match-face nil
-                      :background nil
-                      :foreground "orange")
-  (set-face-attribute 'ido-vertical-only-match-face nil
-                      :background nil
-                      :foreground nil)
-  (set-face-attribute 'ido-vertical-match-face nil
-                      :foreground nil)
-  (ido-vertical-mode 1))
+  (setq ido-vertical-define-keys 'C-n-C-p-up-and-down))
 
 (use-package smex
   :ensure t
   :bind ("M-x" . smex))
 
 (use-package hl-line
-  :init (global-hl-line-mode 1)
-  :config
-  (set-face-background hl-line-face "color-238"))
+  :init (global-hl-line-mode 1))
 
 (use-package highlight-numbers
   :ensure t
   :defer t
   :init (add-hook 'prog-mode-hook 'highlight-numbers-mode))
 
-(use-package whitespace-cleanup-mode
-  :ensure t
-  :init (global-whitespace-cleanup-mode))
-
 (use-package drag-stuff
   :ensure t
-  :bind (("ESC <up>" . drag-stuff-up)
-	 ("ESC <down>" . drag-stuff-down)))
-
-(use-package powerline
-  :ensure t
-  :init (powerline-default-theme))
+  :bind (("M-<up>" . drag-stuff-up)
+	 ("M-<down>" . drag-stuff-down)))
 
 (use-package company
   :ensure t
