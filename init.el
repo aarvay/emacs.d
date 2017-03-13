@@ -77,6 +77,13 @@
 (require 'diminish)
 (require 'bind-key)
 
+(use-package solarized-theme
+  :ensure t
+  :config
+  (load-theme 'solarized-light t)
+  (setq solarized-distinct-fringe-background t)
+  (setq solarized-use-less-bold t))
+
 (use-package ido
   :config
   (ido-mode 1)
