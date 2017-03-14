@@ -99,14 +99,14 @@
   :ensure t
   :config
   (flx-ido-mode 1)
-  (setq ido-enable-flex-matching t)
-  (setq ido-use-faces nil))
+  (setq ido-enable-flex-matching t))
 
 (use-package ido-vertical-mode
   :ensure t
   :config
   (ido-vertical-mode 1)
-  (setq ido-vertical-define-keys 'C-n-C-p-up-and-down))
+  (setq ido-vertical-define-keys 'C-n-C-p-up-and-down)
+  (setq ido-use-faces t))
 
 (use-package smex
   :ensure t
