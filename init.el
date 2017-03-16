@@ -181,8 +181,19 @@
 (use-package web-mode
   :ensure t
   :mode (("\\.html?\\'" . web-mode)
-         ("\\.eex\\'" . web-mode))
+         ("\\.eex\\'" . web-mode)
+         ("\\.js[x]?\\'" . web-mode)
+         ("\\.css\\'"    . web-mode)
+         ("\\.scss\\'"   . web-mode)
+         ("\\.es6\\'"    . web-mode))
   :config
+  (setq web-mode-content-types-alist
+        '(("jsx" . "\\.js[x]?\\'")
+          ("javascript" . "\\.es6?\\'")))
+  (setq web-mode-enable-auto-pairing t
+        web-mode-enable-auto-closing t
+        web-mode-enable-auto-indentation t
+        web-mode-enable-css-colorization t)
   (progn
     (setq web-mode-markup-indent-offset 2
           web-mode-css-indent-offset 2
