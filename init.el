@@ -23,6 +23,12 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+;; use-package.el is no longer needed at runtime
+(eval-when-compile
+  (require 'use-package))
+(require 'diminish)
+(require 'bind-key)
+
 ;; Keep emacs custom settings in separate file
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
@@ -74,8 +80,12 @@
   (setq mac-command-modifier 'meta)
   (setq mac-option-modifier nil))
 
-(require 'diminish)
-(require 'bind-key)
+;; Set the path variable
+(use-package exec-path-from-shell
+  :ensure t
+  :init (setq exec-path-from-shell-check-startup-files nil)
+  :config
+  (exec-path-from-shell-initialize))
 
 (use-package solarized-theme
   :ensure t
@@ -91,7 +101,6 @@
 
 (use-package ido-ubiquitous
   :ensure t
-  :pin melpa
   :config
   (ido-ubiquitous-mode 1))
 
