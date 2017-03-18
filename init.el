@@ -1,4 +1,9 @@
-;;; init.el --- Emacs configuration of aarvay
+;;; init.el --- aarvay/emacs.d
+
+;;; Commentary:
+;; aarvay's custon Emacs configuration
+
+;;; Code:
 
 ;; Don't load outdated byte code
 (setq load-prefer-newer t)
@@ -8,6 +13,7 @@
 
 ;; Setup package.el with use-package
 (require 'package)
+(setq package-enable-at-startup nil)
 (setq package-archives
       '(("melpa-stable" . "https://stable.melpa.org/packages/")
         ("elpa" . "http://elpa.gnu.org/packages/")
@@ -16,7 +22,6 @@
       '(("melpa-stable" . 10)
         ("elpa" . 5)
         ("melpa" . 0)))
-(setq package-enable-at-startup nil)
 (package-initialize)
 
 (unless (package-installed-p 'use-package)
@@ -83,7 +88,6 @@
 ;; Set the path variable
 (use-package exec-path-from-shell
   :ensure t
-  :init (setq exec-path-from-shell-check-startup-files nil)
   :config
   (exec-path-from-shell-initialize))
 
@@ -168,28 +172,22 @@
 
 (use-package elixir-mode
   :ensure t
-  :pin melpa)
-
-(use-package alchemist
-  :ensure t
   :pin melpa
   :config
-  (progn
-    (setq alchemist-goto-elixir-source-dir "~/.asdf/installs/elixir/1.4.2")
-    (setq alchemist-goto-erlang-source-dir "~/.asdf/installs/erlang/19.2")))
+  (use-package alchemist
+    :ensure t
+    :config
+    (progn
+      (setq alchemist-goto-elixir-source-dir "~/.asdf/installs/elixir/1.4.2")
+      (setq alchemist-goto-erlang-source-dir "~/.asdf/installs/erlang/19.2"))))
 
 (use-package web-mode
   :ensure t
   :mode (("\\.html?\\'" . web-mode)
          ("\\.eex\\'" . web-mode)
-         ("\\.js[x]?\\'" . web-mode)
          ("\\.css\\'"    . web-mode)
-         ("\\.scss\\'"   . web-mode)
-         ("\\.es6\\'"    . web-mode))
+         ("\\.scss\\'"   . web-mode))
   :config
-  (setq web-mode-content-types-alist
-        '(("jsx" . "\\.js[x]?\\'")
-          ("javascript" . "\\.es6?\\'")))
   (setq web-mode-enable-auto-pairing t
         web-mode-enable-auto-closing t
         web-mode-enable-auto-indentation t
@@ -209,6 +207,16 @@
 (use-package js
   :init
   (setq js-indent-level 2 ))
+
+(use-package js2-mode
+  :ensure t
+  :mode ("\\.js\\'" . js2-mode)
+  :config (setq js2-basic-offset 2))
+
+(use-package rjsx-mode
+  :ensure t
+  :mode (("\\.jsx\\'" . rjsx-mode)
+         ("components\\/.*\\.js\\'" . rjsx-mode)))
 
 (use-package projectile
   :ensure t
@@ -236,5 +244,12 @@
   :bind (("C-c e" . mc/edit-lines)
 	 ("C-c m" . mc/mark-next-like-this)
 	 ("C-c C-m" . mc/mark-all-like-this)))
+
+(use-package flycheck
+  :ensure t
+  :pin melpa
+  :config
+  (add-hook 'after-init-hook #'global-flycheck-mode)
+  :diminish (flycheck-mode))
 
 ;;; init.el ends here

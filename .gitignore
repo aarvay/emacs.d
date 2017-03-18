@@ -1,5 +1,6 @@
 \#*
 .DS_Store
+.projectile
 ido.last
 auto-save-list
 elpa
