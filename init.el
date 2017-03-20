@@ -93,10 +93,10 @@
 
 (use-package solarized-theme
   :ensure t
-  :config
-  (load-theme 'solarized-light t)
+  :init
   (setq solarized-distinct-fringe-background t)
-  (setq solarized-use-less-bold t))
+  (setq solarized-use-less-bold t)
+  (load-theme 'solarized-light t))
 
 (use-package ido
   :config
@@ -156,11 +156,12 @@
   :ensure t
   :init
   (smartparens-global-mode)
-  (show-smartparens-global-mode)
   :bind ("C-c f" . sp-up-sexp)
   :config
-  (require 'smartparens-config)
-  :diminish (smartparens-mode))
+  (use-package smartparens-config
+    :config
+    (show-smartparens-global-mode t))
+  :diminish smartparens-mode)
 
 (use-package markdown-mode
   :ensure t
@@ -178,8 +179,8 @@
     :ensure t
     :config
     (progn
-      (setq alchemist-goto-elixir-source-dir "~/.asdf/installs/elixir/1.4.2")
-      (setq alchemist-goto-erlang-source-dir "~/.asdf/installs/erlang/19.2"))))
+      (setq alchemist-goto-erlang-source-dir "~/.asdf/installs/erlang/19.2")
+      (setq alchemist-goto-elixir-source-dir "~/.asdf/installs/elixir/1.4.2"))))
 
 (use-package web-mode
   :ensure t
