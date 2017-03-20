@@ -1,7 +1,8 @@
 \#*
 .DS_Store
 .projectile
-ido.last
+.mc-lists.el
+recentf
 auto-save-list
 elpa
 tmp

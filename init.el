@@ -50,8 +50,8 @@
 
 ;; Auto refresh buffers, dired, and be quiet about it
 (global-auto-revert-mode 1)
-(setq global-auto-revert-non-file-buffers t
-      auto-revert-verbose nil)
+(setq global-auto-revert-non-file-buffers t)
+(setq auto-revert-verbose nil)
 
 ;; Startup stuff
 (setq inhibit-startup-message t
@@ -98,32 +98,26 @@
   (setq solarized-use-less-bold t)
   (load-theme 'solarized-light t))
 
-(use-package ido
-  :config
-  (ido-mode 1)
-  (ido-everywhere 1))
-
-(use-package ido-ubiquitous
-  :ensure t
-  :config
-  (ido-ubiquitous-mode 1))
-
-(use-package flx-ido
-  :ensure t
-  :config
-  (flx-ido-mode 1)
-  (setq ido-enable-flex-matching t))
-
-(use-package ido-vertical-mode
-  :ensure t
-  :config
-  (ido-vertical-mode 1)
-  (setq ido-vertical-define-keys 'C-n-C-p-up-and-down)
-  (setq ido-use-faces t))
-
 (use-package smex
-  :ensure t
-  :bind ("M-x" . smex))
+  :ensure t)
+
+(use-package ivy
+  :load-path "~/code/git/swiper"
+  :demand
+  :bind ("C-c C-r" . ivy-resume)
+  :config
+  (ivy-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-re-builders-alist
+        '((swiper . ivy--regex-plus)
+          (t . ivy--regex-fuzzy)))
+  (use-package swiper
+    :bind ("C-s" . swiper))
+  (use-package counsel
+    :bind (("M-x" . counsel-M-x)
+           ("C-x C-f" . counsel-find-file)
+           ("C-h f" . counsel-describe-function)
+           ("C-h v" . counsel-describe-variable))))
 
 (use-package hl-line
   :init (global-hl-line-mode 1))
@@ -224,6 +218,7 @@
   :config
   (projectile-global-mode)
   (setq projectile-enable-caching t)
+  (setq projectile-completion-system 'ivy)
   :diminish (projectile-mode))
 
 (use-package rust-mode
