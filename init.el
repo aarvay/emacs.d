@@ -98,9 +98,6 @@
   (setq solarized-use-less-bold t)
   (load-theme 'solarized-light t))
 
-(use-package smex
-  :ensure t)
-
 (use-package ivy
   :load-path "~/code/git/swiper"
   :demand
@@ -108,6 +105,7 @@
   :config
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
+  (setq ivy-initial-inputs-alist nil)
   (setq ivy-re-builders-alist
         '((swiper . ivy--regex-plus)
           (t . ivy--regex-fuzzy)))
@@ -118,6 +116,12 @@
            ("C-x C-f" . counsel-find-file)
            ("C-h f" . counsel-describe-function)
            ("C-h v" . counsel-describe-variable))))
+
+(use-package smex
+  :ensure t)
+
+(use-package flx
+  :ensure t)
 
 (use-package hl-line
   :init (global-hl-line-mode 1))
