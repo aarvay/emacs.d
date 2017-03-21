@@ -123,6 +123,11 @@
 (use-package flx
   :ensure t)
 
+(use-package avy
+  :ensure t
+  :bind(("C-'" . avy-goto-char-timer)
+        ("M-g g" . avy-goto-line)))
+
 (use-package hl-line
   :init (global-hl-line-mode 1))
 
