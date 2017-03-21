@@ -99,7 +99,7 @@
   (load-theme 'solarized-light t))
 
 (use-package ivy
-  :load-path "~/code/git/swiper"
+  :ensure t
   :demand
   :bind ("C-c C-r" . ivy-resume)
   :config
@@ -110,12 +110,15 @@
         '((swiper . ivy--regex-plus)
           (t . ivy--regex-fuzzy)))
   (use-package swiper
+    :ensure t
     :bind ("C-s" . swiper))
   (use-package counsel
+    :ensure t
     :bind (("M-x" . counsel-M-x)
            ("C-x C-f" . counsel-find-file)
            ("C-h f" . counsel-describe-function)
-           ("C-h v" . counsel-describe-variable))))
+           ("C-h v" . counsel-describe-variable)))
+  :diminish ivy-mode)
 
 (use-package smex
   :ensure t)
