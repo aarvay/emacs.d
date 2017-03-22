@@ -95,7 +95,9 @@
   :ensure t
   :init
   (setq solarized-distinct-fringe-background t)
+  (setq solarized-high-contrast-mode-line t)
   (setq solarized-use-less-bold t)
+  (setq x-underline-at-descent-line t)
   (load-theme 'solarized-light t))
 
 (use-package ivy
@@ -186,7 +188,8 @@
     :config
     (progn
       (setq alchemist-goto-erlang-source-dir "~/.asdf/installs/erlang/19.2")
-      (setq alchemist-goto-elixir-source-dir "~/.asdf/installs/elixir/1.4.2"))))
+      (setq alchemist-goto-elixir-source-dir "~/.asdf/installs/elixir/1.4.2"))
+    :diminish alchemist-mode))
 
 (use-package web-mode
   :ensure t
@@ -218,12 +221,16 @@
 (use-package js2-mode
   :ensure t
   :mode ("\\.js\\'" . js2-mode)
-  :config (setq js2-basic-offset 2))
+  :config
+  (setq js2-basic-offset 2)
+  (add-hook 'js2-mode-hook (lambda() (setq-local mode-name "JavaScript"))))
 
 (use-package rjsx-mode
   :ensure t
   :mode (("\\.jsx\\'" . rjsx-mode)
-         ("components\\/.*\\.js\\'" . rjsx-mode)))
+         ("components\\/.*\\.js\\'" . rjsx-mode))
+  :config
+  (add-hook 'rjsx-mode-hook (lambda() (setq-local mode-name "JSX"))))
 
 (use-package projectile
   :ensure t
