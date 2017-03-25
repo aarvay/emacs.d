@@ -269,4 +269,13 @@
   (add-hook 'after-init-hook #'global-flycheck-mode)
   :diminish (flycheck-mode))
 
+(use-package elm-mode
+  :ensure t
+  :mode (("\\.elm\\'" . elm-mode))
+  :config
+  (setq elm-format-on-save t)
+  (with-eval-after-load 'company
+    (add-to-list 'company-backends 'company-elm))
+  :diminish elm-indent-mode)
+
 ;;; init.el ends here
