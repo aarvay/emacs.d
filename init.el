@@ -1,7 +1,7 @@
 ;;; init.el --- aarvay/emacs.d
 
 ;;; Commentary:
-;; aarvay's custon Emacs configuration
+;; aarvay's custom Emacs configuration
 
 ;;; Code:
 
