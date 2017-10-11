@@ -91,14 +91,11 @@
   :config
   (exec-path-from-shell-initialize))
 
-(use-package solarized-theme
+(use-package nord-theme
   :ensure t
   :init
-  (setq solarized-distinct-fringe-background t)
-  (setq solarized-high-contrast-mode-line t)
-  (setq solarized-use-less-bold t)
-  (setq x-underline-at-descent-line t)
-  (load-theme 'solarized-light t))
+  (setq nord-uniform-mode-lines t)
+  (load-theme 'nord t))
 
 (use-package ivy
   :ensure t
