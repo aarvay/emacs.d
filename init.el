@@ -73,17 +73,13 @@
               column-number-mode t
               ring-bell-function #'ignore
               cursor-type 'bar)
+(set-frame-font "Roboto Mono for Powerline 12" nil t)
 
 ;; utf-8 all the things
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
-
-;; Bind meta to cmd
-(when (eq system-type 'darwin)
-  (setq mac-command-modifier 'meta)
-  (setq mac-option-modifier nil))
 
 ;; Set the path variable
 (use-package exec-path-from-shell
@@ -94,7 +90,6 @@
 (use-package nord-theme
   :ensure t
   :init
-  (setq nord-uniform-mode-lines t)
   (load-theme 'nord t))
 
 (use-package ivy
