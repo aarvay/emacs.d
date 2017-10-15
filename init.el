@@ -36,7 +36,7 @@
 
 ;; Keep emacs custom settings in separate file
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-(load custom-file)
+(load custom-file 'noerror)
 
 ;; Place all auto-saves and backups in tmp
 (setq temporary-file-directory (expand-file-name "~/.emacs.d/tmp"))
@@ -178,7 +178,6 @@
 
 (use-package elixir-mode
   :ensure t
-  :pin melpa
   :config
   (use-package alchemist
     :ensure t
