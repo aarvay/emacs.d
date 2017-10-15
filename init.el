@@ -163,6 +163,11 @@
     (show-smartparens-global-mode t))
   :diminish smartparens-mode)
 
+(use-package rainbow-delimiters
+  :ensure t
+  :defer t
+  :init (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+
 (use-package markdown-mode
   :ensure t
   :commands (markdown-mode gfm-mode)
